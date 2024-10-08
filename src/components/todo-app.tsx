@@ -80,19 +80,22 @@ export function TodoAppComponent() {
     <div className="w-full max-w-[612px] mx-auto mt-10 p-6 bg-white rounded-lg shadow-lg">
       <div className="flex mb-4">
         <Input
+          aria-label='new-todo'
           type="text"
+          name="new-todo"
           value={newTodo}
           onChange={(e) => setNewTodo(e.target.value)}
           onKeyDown={handleKeyDown}
           placeholder="Add a new todo"
           className="flex-grow mr-2"
         />
-        <Button onClick={addTodo} className="bg-blue-500 hover:bg-blue-600 text-white">Add</Button>
+        <Button id="add-new-todo" onClick={addTodo} className="bg-blue-500 hover:bg-blue-600 text-white">Add</Button>
       </div>
       {todos.length > 0 && (
         <div className="mb-4 flex justify-center">
           <div className="inline-flex space-x-3 rounded-full bg-gray-100 p-1">
             <Button
+              aria-label='all'
               onClick={() => setFilter('all')}
               className={`bg-white hover:bg-white text-gray-800 px-4 py-2 rounded-full text-sm ${filter === 'all'
                 ? 'border-[1px] border-zinc-600'
@@ -102,6 +105,7 @@ export function TodoAppComponent() {
               All ({todos.length})
             </Button>
             <Button
+              aria-label='pending'
               onClick={() => setFilter('pending')}
               className={` bg-white hover:bg-white text-gray-800 px-4 py-2 rounded-full text-sm ${filter === 'pending'
                 ? 'border-[1px] border-zinc-600'
@@ -111,6 +115,7 @@ export function TodoAppComponent() {
               Pending ({pendingCount})
             </Button>
             <Button
+              aria-label='completed'
               onClick={() => setFilter('completed')}
               className={`bg-white hover:bg-white text-gray-800 px-4 py-2 rounded-full text-sm ${filter === 'completed'
                 ? 'border-[1px] border-zinc-600'
@@ -129,6 +134,7 @@ export function TodoAppComponent() {
               <>
                 <Input
                   type="text"
+                  name="edit-todo"
                   value={editText}
                   onChange={(e) => setEditText(e.target.value)}
                   onKeyDown={(e) => {
@@ -136,7 +142,7 @@ export function TodoAppComponent() {
                   }}
                   className="flex-grow"
                 />
-                <Button onClick={saveEdit} size="sm" className="bg-green-500 hover:bg-green-600 text-white">
+                <Button id="save-edit" onClick={saveEdit} size="sm" className="bg-green-500 hover:bg-green-600 text-white">
                   <Check className="h-4 w-4" />
                 </Button>
               </>
