@@ -170,7 +170,7 @@ export function TodoAppComponent() {
           </li>
         ))}
       </ul>
-      {todos.length > 0 && (
+      {todos.length > 0 ? (
         <div className="mt-4 flex justify-between items-center">
           <div className="space-x-2">
             <Button onClick={markAllDone} variant="outline" className="hover:bg-gray-100">Mark All Done</Button>
@@ -179,7 +179,9 @@ export function TodoAppComponent() {
           <div className="text-gray-600">
             Total: {todos.length} {todos.length === 1 ? 'item' : 'items'}
           </div>
-        </div>
+        </div> 
+      )  : (
+        <div className="mt-4 text-gray-600 text-center">No todos yet!</div>
       )}
     </div>
   )
