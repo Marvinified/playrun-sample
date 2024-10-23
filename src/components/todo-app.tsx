@@ -15,7 +15,7 @@ interface Todo {
 type FilterType = 'all' | 'pending' | 'completed'
 
 export function TodoAppComponent() {
-  const [todos, setTodos] = useState<Todo[]>([])
+  const [todos, setTodos] = useState<Todo[]>(JSON.parse(localStorage.getItem('todos') ?? '[]'))
   const [newTodo, setNewTodo] = useState('')
   const [editingId, setEditingId] = useState<number | null>(null)
   const [editText, setEditText] = useState('')
@@ -23,7 +23,8 @@ export function TodoAppComponent() {
 
   const addTodo = () => {
     if (newTodo.trim() !== '') {
-      setTodos([...todos, { id: Date.now(), text: newTodo, completed: false }])
+      setTodos([...todos, { id: todos.length, text: newTodo, completed: false }])
+      localStorage.setItem('todos', JSON.stringify([...todos, { id: todos.length, text: newTodo, completed: false }]))
       setNewTodo('')
     }
   }
@@ -38,10 +39,16 @@ export function TodoAppComponent() {
     setTodos(todos.map(todo =>
       todo.id === id ? { ...todo, completed: !todo.completed } : todo
     ))
+
+    localStorage.setItem('todos', JSON.stringify(todos.map(todo =>
+      todo.id === id ? { ...todo, completed: !todo.completed } : todo
+    )))
+
   }
 
   const deleteTodo = (id: number) => {
     setTodos(todos.filter(todo => todo.id !== id))
+    localStorage.setItem('todos', JSON.stringify(todos.filter(todo => todo.id !== id)))
   }
 
   const startEditing = (id: number, text: string) => {
@@ -54,16 +61,21 @@ export function TodoAppComponent() {
       setTodos(todos.map(todo =>
         todo.id === editingId ? { ...todo, text: editText } : todo
       ))
+      localStorage.setItem('todos', JSON.stringify(todos.map(todo =>
+        todo.id === editingId ? { ...todo, text: editText } : todo
+      )))
       setEditingId(null)
     }
   }
 
   const markAllDone = () => {
     setTodos(todos.map(todo => ({ ...todo, completed: true })))
+    localStorage.setItem('todos', JSON.stringify(todos.map(todo => ({ ...todo, completed: true }))))
   }
 
   const clearList = () => {
     setTodos([])
+    localStorage.setItem('todos', JSON.stringify([]))
   }
 
   const filteredTodos = todos.filter(todo => {
@@ -179,8 +191,8 @@ export function TodoAppComponent() {
           <div className="text-gray-600">
             Total: {todos.length} {todos.length === 1 ? 'item' : 'items'}
           </div>
-        </div> 
-      )  : (
+        </div>
+      ) : (
         <div className="mt-4 text-gray-600 text-center">No todos yet!</div>
       )}
     </div>
