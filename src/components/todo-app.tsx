@@ -4,10 +4,7 @@ import { useState, KeyboardEvent } from 'react'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Checkbox } from "@/components/ui/checkbox"
-import {
-  //  Trash2,
-  Edit2, Check
-} from 'lucide-react'
+import { Trash2, Edit2, Check } from 'lucide-react'
 
 interface Todo {
   id: number;
@@ -49,10 +46,10 @@ export function TodoAppComponent() {
 
   }
 
-  // const deleteTodo = (id: number) => {
-  //   setTodos(todos.filter(todo => todo.id !== id))
-  //   localStorage.setItem('todos', JSON.stringify(todos.filter(todo => todo.id !== id)))
-  // }
+  const deleteTodo = (id: number) => {
+    setTodos(todos.filter(todo => todo.id !== id))
+    localStorage.setItem('todos', JSON.stringify(todos.filter(todo => todo.id !== id)))
+  }
 
   const startEditing = (id: number, text: string) => {
     setEditingId(id)
@@ -177,9 +174,9 @@ export function TodoAppComponent() {
                 <Button onClick={() => startEditing(todo.id, todo.text)} size="sm" variant="outline" className="hover:bg-gray-200" aria-label='edit' >
                   <Edit2 className="h-4 w-4" />
                 </Button>
-                {/* <Button onClick={() => deleteTodo(todo.id)} size="sm" variant="outline" className="border-red-500 text-red-500 hover:bg-red-500 hover:text-white" aria-label='delete'>
+                <Button onClick={() => deleteTodo(todo.id)} size="sm" variant="outline" className="border-red-500 text-red-500 hover:bg-red-500 hover:text-white" aria-label='delete'>
                   <Trash2 className="h-4 w-4" />
-                </Button> */}
+                </Button>
               </>
             )}
           </li>
