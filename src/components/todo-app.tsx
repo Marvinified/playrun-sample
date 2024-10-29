@@ -4,7 +4,10 @@ import { useState, KeyboardEvent } from 'react'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Checkbox } from "@/components/ui/checkbox"
-import { Trash2, Edit2, Check } from 'lucide-react'
+import {
+  //  Trash2,
+  Edit2, Check
+} from 'lucide-react'
 
 interface Todo {
   id: number;
@@ -46,10 +49,10 @@ export function TodoAppComponent() {
 
   }
 
-  const deleteTodo = (id: number) => {
-    setTodos(todos.filter(todo => todo.id !== id))
-    localStorage.setItem('todos', JSON.stringify(todos.filter(todo => todo.id !== id)))
-  }
+  // const deleteTodo = (id: number) => {
+  //   setTodos(todos.filter(todo => todo.id !== id))
+  //   localStorage.setItem('todos', JSON.stringify(todos.filter(todo => todo.id !== id)))
+  // }
 
   const startEditing = (id: number, text: string) => {
     setEditingId(id)
