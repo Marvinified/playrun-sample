@@ -174,9 +174,9 @@ export function TodoAppComponent() {
                 <Button onClick={() => startEditing(todo.id, todo.text)} size="sm" variant="outline" className="hover:bg-gray-200" aria-label='edit' >
                   <Edit2 className="h-4 w-4" />
                 </Button>
-                <Button onClick={() => deleteTodo(todo.id)} size="sm" variant="outline" className="border-red-500 text-red-500 hover:bg-red-500 hover:text-white" aria-label='delete'>
+                {/* <Button onClick={() => deleteTodo(todo.id)} size="sm" variant="outline" className="border-red-500 text-red-500 hover:bg-red-500 hover:text-white" aria-label='delete'>
                   <Trash2 className="h-4 w-4" />
-                </Button>
+                </Button> */}
               </>
             )}
           </li>
